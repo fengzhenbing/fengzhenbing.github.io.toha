@@ -29,6 +29,7 @@ enableEmoji: true
 params:
   # GitHub repo URL of your site
   gitRepo: https://github.com/fengzhenbing/fengzhenbing.github.io
+  gitBranch: master
 
   # specify whether you want to write some blog posts or not
   enableBlogPost: true
