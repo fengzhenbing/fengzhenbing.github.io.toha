@@ -1,0 +1,18 @@
+# some information about you
+name: "冯振兵"
+nickname: "阿兵"
+# greeting message before your name. it will default to "Hi! I am" if not provided
+greeting: "哟, 我是"
+image: "images/author/john.png"
+# give your some contact information. they will be used in the footer
+contactInfo:
+  邮箱: "595611161@qq.com"
+  电话: "+8615380837691"
+
+# some summary about what you do，首页滚动信息
+summary:
+  - I am a Developer
+  - I am a Devops
+  - I love servers
+  - I work on open-source projects
+  - I love to work with some fun projects
