@@ -1,7 +1,7 @@
 ---
 title: "Hugo搭建博客"
 date: 2020-12-08T08:06:25+06:00
-description: Introduction to Sample Post
+description: How to build blog by Hugo
 menu:
   sidebar:
     name: Hugo搭建博客
