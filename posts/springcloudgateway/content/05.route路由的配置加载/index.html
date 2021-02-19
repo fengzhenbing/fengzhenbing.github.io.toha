@@ -1,0 +1,286 @@
+<!doctype html><html><head><title>05.route路由的配置加载</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/layouts/main.css><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/navigators/navbar.css><link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css><link rel=icon type=image/png href=/images/favicon_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png><link rel=stylesheet href=/css/style.css><meta name=description content="05.route路由的配置加载"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css><link rel=stylesheet href=/css/layouts/single.css><link rel=stylesheet href=/css/navigators/sidebar.css></head><body data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span></button>
+<a class=navbar-brand href=/><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png>Feng Zhenbing's Blog</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"></ul></div></div><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png class=d-none id=main-logo>
+<img src=/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png class=d-none id=inverted-logo></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><input type=text placeholder=Search data-search id=search-box><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts data-filter=all>博文</a></li><div class=subtree><li><a href=/posts/introduction/>Hugo搭建博客</a></li><li><i class="fas fa-plus-circle"></i><a href=/posts/redis/>redis</a><ul><li><a href=/posts/redis/content/redis%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C/>安装redis</a></li><li><a href=/posts/redis/content/redis%E5%9F%BA%E7%A1%80/>redis基础</a></li><li><a href=/posts/redis/content/redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/>redis应用场景</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/springcloudgateway/>spring cloud gateway</a><ul class=active><li><a href=/posts/springcloudgateway/content/01.gateway%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91/>01.gateway整体逻辑</a></li><li><a href=/posts/springcloudgateway/content/02.reactor%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/>02.reactor响应式编程学习</a></li><li><a href=/posts/springcloudgateway/content/03.scg-nettywebserver%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/>03.scg NettyWebServer启动过程</a></li><li><a href=/posts/springcloudgateway/content/04.scg-%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/>04.scg 一次请求的执行过程</a></li><li><a class=active href=/posts/springcloudgateway/content/05.route%E8%B7%AF%E7%94%B1%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>05.route路由的配置加载</a></li><li><a href=/posts/springcloudgateway/content/06.route%E9%80%9A%E8%BF%87%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>06.route通过注册中心自动配置加载</a></li><li><a href=/posts/springcloudgateway/content/07.precidate%E7%9A%84%E5%AF%B9%E8%B7%AF%E7%94%B1%E8%BF%9B%E8%A1%8C%E9%80%89%E6%8B%A9/>07.precidate的对路由进行选择</a></li><li><a href=/posts/springcloudgateway/content/08.filter%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%8F%8A%E5%90%88%E5%B9%B6/>08.filter的配置加载及合并</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://fengzhenbing.github.io/images/default-hero.jpg)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/author/fzb.jpeg><h5 class=author-name>冯振兵</h5><p>December 10, 2020</p></div><div class=title><h1>05.route路由的配置加载</h1></div><div class=post-content id=post-content><h3 id=route路由的配置加载>route路由的配置加载</h3><hr><p>主要在sprng-cloud-gateway-server的route包定义路由相关的定义，构建和加载</p><p><img src=https://uploader.shimo.im/f/l4BFEUZyeiAz3pZr.png alt=路由></p><h4 id=0相关配置>0.相关配置</h4><ul><li>通过springboot spi方式，springboot会启动spring.factories中配置的
+org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfiguration</li></ul><pre><code class=language-properties data-lang=properties>org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ 
+org.springframework.cloud.gateway.config.GatewayAutoConfiguration,\
+org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfiguration,\
+  ...
+</code></pre><h4 id=1路由定义>1.路由定义</h4><ul><li>路由定义RouteDefinition</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RouteDefinition</span> <span style=color:#f92672>{</span>
+
+   <span style=color:#66d9ef>private</span> String id<span style=color:#f92672>;</span>
+
+   <span style=color:#a6e22e>@NotEmpty</span>
+   <span style=color:#a6e22e>@Valid</span><span style=color:#75715e>//fzb 断言定义数组
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> List<span style=color:#f92672>&lt;</span>PredicateDefinition<span style=color:#f92672>&gt;</span> predicates <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
+
+   <span style=color:#a6e22e>@Valid</span><span style=color:#75715e>//fzb 过滤器定义数组
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> List<span style=color:#f92672>&lt;</span>FilterDefinition<span style=color:#f92672>&gt;</span> filters <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
+
+   <span style=color:#a6e22e>@NotNull</span><span style=color:#75715e>//fzb 路由路径
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> URI uri<span style=color:#f92672>;</span>
+   <span style=color:#f92672>...</span>
+   <span style=color:#f92672>}</span>
+</code></pre></div><ul><li>路由定义定位器</li></ul><p>获取路由的定义，负责读取上述路由定义配置 RouteDefinition，最终会通过路由定义生成路由</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>RouteDefinitionLocator</span> <span style=color:#f92672>{</span>
+   <span style=color:#75715e>//fzb 获取路由定义对象
+</span><span style=color:#75715e></span>   Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>();</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>有以下实现：</p><p><img src=https://uploader.shimo.im/f/ysqsavn1nfbwS2C3.png alt=RouteDefinitionLocator></p><blockquote><ul><li>CachingRouteDefinitionLocator: 它包装了CompositeRouteDefinitionLocator,缓存路由定义RouteDefinition列表</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CachingRouteDefinitionLocator</span>
+     <span style=color:#66d9ef>implements</span> RouteDefinitionLocator<span style=color:#f92672>,</span> ApplicationListener<span style=color:#f92672>&lt;</span>RefreshRoutesEvent<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span><span style=color:#75715e>//fzb 事件监听RefreshRoutesEvent
+</span><span style=color:#75715e></span>
+ <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String CACHE_KEY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;routeDefs&#34;</span><span style=color:#f92672>;</span>
+
+ <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> RouteDefinitionLocator delegate<span style=color:#f92672>;</span>
+ <span style=color:#75715e>//fzb 路由定义flux
+</span><span style=color:#75715e></span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> routeDefinitions<span style=color:#f92672>;</span>
+ <span style=color:#75715e>//fzb 内存缓存RouteDefinition
+</span><span style=color:#75715e></span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> List<span style=color:#f92672>&gt;</span> cache <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ConcurrentHashMap<span style=color:#f92672>&lt;&gt;();</span>
+ <span style=color:#f92672>...</span>
+
+ <span style=color:#75715e>//fzb 监听到路由刷新事件，重新获取路由并缓存到cache
+</span><span style=color:#75715e></span> <span style=color:#a6e22e>@Override</span>
+ <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onApplicationEvent</span><span style=color:#f92672>(</span>RefreshRoutesEvent event<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+     fetch<span style=color:#f92672>().</span><span style=color:#a6e22e>materialize</span><span style=color:#f92672>().</span><span style=color:#a6e22e>collect</span><span style=color:#f92672>(</span>Collectors<span style=color:#f92672>.</span><span style=color:#a6e22e>toList</span><span style=color:#f92672>())</span>
+             <span style=color:#f92672>.</span><span style=color:#a6e22e>doOnNext</span><span style=color:#f92672>(</span>routes <span style=color:#f92672>-&gt;</span> cache<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>CACHE_KEY<span style=color:#f92672>,</span> routes<span style=color:#f92672>)).</span><span style=color:#a6e22e>subscribe</span><span style=color:#f92672>();</span>
+ <span style=color:#f92672>}</span>
+<span style=color:#f92672>...</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><blockquote><ul><li>CompositeRouteDefinitionLocator:
+遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并； 组合多种 RouteDefinitionLocator 的实现，为 routeDefinitions提供统一入口</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CompositeRouteDefinitionLocator</span> <span style=color:#66d9ef>implements</span> RouteDefinitionLocator <span style=color:#f92672>{</span>
+<span style=color:#f92672>...</span>
+	<span style=color:#75715e>//fzb 组合多个路由定义定位器RouteDefinitionLocator
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinitionLocator<span style=color:#f92672>&gt;</span> delegates<span style=color:#f92672>;</span>
+	<span style=color:#75715e>// fzb 路由定义的id 生成器，默认UUID
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> IdGenerator idGenerator<span style=color:#f92672>;</span>
+<span style=color:#f92672>...</span>
+	<span style=color:#66d9ef>public</span> <span style=color:#a6e22e>CompositeRouteDefinitionLocator</span><span style=color:#f92672>(</span>Flux<span style=color:#f92672>&lt;</span>RouteDefinitionLocator<span style=color:#f92672>&gt;</span> delegates<span style=color:#f92672>,</span>
+			IdGenerator idGenerator<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>delegates</span> <span style=color:#f92672>=</span> delegates<span style=color:#f92672>;</span>
+		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>idGenerator</span> <span style=color:#f92672>=</span> idGenerator<span style=color:#f92672>;</span><span style=color:#75715e>// 路由定义的id 生成器，默认UUID
+</span><span style=color:#75715e></span>	<span style=color:#f92672>}</span>
+
+	<span style=color:#a6e22e>@Override</span>
+	<span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+      <span style=color:#75715e>//遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>delegates</span>
+				<span style=color:#f92672>.</span><span style=color:#a6e22e>flatMapSequential</span><span style=color:#f92672>(</span>RouteDefinitionLocator<span style=color:#f92672>::</span>getRouteDefinitions<span style=color:#f92672>)</span>
+				<span style=color:#f92672>.</span><span style=color:#a6e22e>flatMap</span><span style=color:#f92672>(</span>routeDefinition <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+					<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+						<span style=color:#66d9ef>return</span> randomId<span style=color:#f92672>().</span><span style=color:#a6e22e>map</span><span style=color:#f92672>(</span>id <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+							routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>setId</span><span style=color:#f92672>(</span>id<span style=color:#f92672>);</span><span style=color:#75715e>// 设置uuid
+</span><span style=color:#75715e></span>							<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>log<span style=color:#f92672>.</span><span style=color:#a6e22e>isDebugEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+								log<span style=color:#f92672>.</span><span style=color:#a6e22e>debug</span><span style=color:#f92672>(</span>
+										<span style=color:#e6db74>&#34;Id set on route definition: &#34;</span> <span style=color:#f92672>+</span> routeDefinition<span style=color:#f92672>);</span>
+							<span style=color:#f92672>}</span>
+							<span style=color:#66d9ef>return</span> routeDefinition<span style=color:#f92672>;</span>
+						<span style=color:#f92672>});</span>
+					<span style=color:#f92672>}</span>
+					<span style=color:#66d9ef>return</span> Mono<span style=color:#f92672>.</span><span style=color:#a6e22e>just</span><span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>);</span>
+				<span style=color:#f92672>});</span>
+	<span style=color:#f92672>}</span>
+ <span style=color:#f92672>...</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><blockquote><ul><li>PropertiesRouteDefinitionLocator: 从配置文件(GatewayProperties 例如，YML / Properties 等 ) 读取RouteDefinition</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>   <span style=color:#75715e>//fzb 从GatewayProperties读取路由定义
+</span><span style=color:#75715e></span>   <span style=color:#a6e22e>@Override</span>
+   <span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+       <span style=color:#66d9ef>return</span> Flux<span style=color:#f92672>.</span><span style=color:#a6e22e>fromIterable</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>properties</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRoutes</span><span style=color:#f92672>());</span>
+   <span style=color:#f92672>}</span>
+</code></pre></div><blockquote><ul><li>DiscoveryClientRouteDefinitionLocator 从注册中心如：Netflix Eureka， Consul 或 Zookeeper读取RouteDefinition</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DiscoveryClientRouteDefinitionLocator</span><span style=color:#f92672>(</span>ReactiveDiscoveryClient discoveryClient<span style=color:#f92672>,</span>
+      DiscoveryLocatorProperties properties<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+   <span style=color:#66d9ef>this</span><span style=color:#f92672>(</span>discoveryClient<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getSimpleName</span><span style=color:#f92672>(),</span> properties<span style=color:#f92672>);</span>
+   <span style=color:#75715e>//fzb 通过服务发现客户端 ，比如eureka客户端从注册中心拿到所有的服务实例
+</span><span style=color:#75715e></span>   serviceInstances <span style=color:#f92672>=</span> discoveryClient<span style=color:#f92672>.</span><span style=color:#a6e22e>getServices</span><span style=color:#f92672>()</span>
+         <span style=color:#f92672>.</span><span style=color:#a6e22e>flatMap</span><span style=color:#f92672>(</span>service <span style=color:#f92672>-&gt;</span> discoveryClient<span style=color:#f92672>.</span><span style=color:#a6e22e>getInstances</span><span style=color:#f92672>(</span>service<span style=color:#f92672>).</span><span style=color:#a6e22e>collectList</span><span style=color:#f92672>());</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><p>将服务实例serviceInstances转为路由定义</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#a6e22e>@Override</span>
+<span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+  SpelExpressionParser parser <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SpelExpressionParser<span style=color:#f92672>();</span>
+  Expression includeExpr <span style=color:#f92672>=</span> parser
+        <span style=color:#f92672>.</span><span style=color:#a6e22e>parseExpression</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getIncludeExpression</span><span style=color:#f92672>());</span><span style=color:#75715e>//fzb  扩展点，可以通过properties 配置其他spel
+</span><span style=color:#75715e></span>  Expression urlExpr <span style=color:#f92672>=</span> parser<span style=color:#f92672>.</span><span style=color:#a6e22e>parseExpression</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getUrlExpression</span><span style=color:#f92672>());</span>
+  <span style=color:#f92672>...</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><blockquote><ul><li>RouteDefinitionRepository 从存储器(内存 / Redis / MySQL 等 )读取RouteDefinition，实现RouteDefinitionWriter接口；
+提供删除和保存RouteDefinition的方法；
+默认实现有：InMemoryRouteDefinitionRepository,没有RouteDefinitionRepository的实例，则默认用InMemoryRouteDefinitionRepository</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InMemoryRouteDefinitionRepository</span> <span style=color:#66d9ef>implements</span> RouteDefinitionRepository <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> RouteDefinition<span style=color:#f92672>&gt;</span> routes <span style=color:#f92672>=</span> synchronizedMap<span style=color:#f92672>(</span>
+			<span style=color:#66d9ef>new</span> LinkedHashMap<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> RouteDefinition<span style=color:#f92672>&gt;());</span><span style=color:#75715e>//fzb 内存中用 同步map 存储
+</span><span style=color:#75715e></span>
+	<span style=color:#a6e22e>@Override</span><span style=color:#75715e>// fzb 保存路由到内存中
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> Mono<span style=color:#f92672>&lt;</span>Void<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>save</span><span style=color:#f92672>(</span>Mono<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> route<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>return</span> route<span style=color:#f92672>.</span><span style=color:#a6e22e>flatMap</span><span style=color:#f92672>(</span>r <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>StringUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>(</span>r<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>()))</span> <span style=color:#f92672>{</span>
+				<span style=color:#66d9ef>return</span> Mono<span style=color:#f92672>.</span><span style=color:#a6e22e>error</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;id may not be empty&#34;</span><span style=color:#f92672>));</span>
+			<span style=color:#f92672>}</span>
+			routes<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>r<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>(),</span> r<span style=color:#f92672>);</span><span style=color:#75715e>//保存
+</span><span style=color:#75715e></span>			<span style=color:#66d9ef>return</span> Mono<span style=color:#f92672>.</span><span style=color:#a6e22e>empty</span><span style=color:#f92672>();</span>
+		<span style=color:#f92672>});</span>
+	<span style=color:#f92672>}</span>
+
+	<span style=color:#a6e22e>@Override</span><span style=color:#75715e>// fzb 从内存中删除路由
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> Mono<span style=color:#f92672>&lt;</span>Void<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>delete</span><span style=color:#f92672>(</span>Mono<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> routeId<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		<span style=color:#f92672>...</span>
+	<span style=color:#f92672>}</span>
+
+	<span style=color:#a6e22e>@Override</span><span style=color:#75715e>// fzb 获取路由定义
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>return</span> Flux<span style=color:#f92672>.</span><span style=color:#a6e22e>fromIterable</span><span style=color:#f92672>(</span>routes<span style=color:#f92672>.</span><span style=color:#a6e22e>values</span><span style=color:#f92672>());</span>
+	<span style=color:#f92672>}</span>
+
+<span style=color:#f92672>}</span>
+</code></pre></div><blockquote><ul><li>自定义路由存储器,redis存储：RedisRouteDefinitionRepository
+<a href=https://github.com/fengzhenbing/spring-cloud-gateway-demo/blob/master/demo-gateway/src/main/java/org/fzb/demo/gateway/route/RedisRouteDefinitionRepository.java>https://github.com/fengzhenbing/spring-cloud-gateway-demo/blob/master/demo-gateway/src/main/java/org/fzb/demo/gateway/route/RedisRouteDefinitionRepository.java</a></li></ul></blockquote><h4 id=2路由>2.路由</h4><ul><li>路由Route</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Route</span> <span style=color:#66d9ef>implements</span> Ordered <span style=color:#f92672>{</span>
+
+   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> String id<span style=color:#f92672>;</span>
+   <span style=color:#75715e>//fzb 路由地址
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> URI uri<span style=color:#f92672>;</span>
+   <span style=color:#75715e>//fzb 路由的优先级
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> order<span style=color:#f92672>;</span>
+
+   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> AsyncPredicate<span style=color:#f92672>&lt;</span>ServerWebExchange<span style=color:#f92672>&gt;</span> predicate<span style=color:#f92672>;</span>
+   <span style=color:#75715e>//fzb gatewayFilter列表
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> List<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> gatewayFilters<span style=color:#f92672>;</span>
+   <span style=color:#75715e>//fzb 元数据
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;</span> metadata<span style=color:#f92672>;</span>
+<span style=color:#f92672>...</span>
+<span style=color:#f92672>}</span>
+</code></pre></div><ul><li>路由定位器 RouteLocator
+获取路由对象</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>RouteLocator</span> <span style=color:#f92672>{</span>
+	<span style=color:#75715e>//fzb 获取路由对象
+</span><span style=color:#75715e></span>	Flux<span style=color:#f92672>&lt;</span>Route<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRoutes</span><span style=color:#f92672>();</span>
+
+<span style=color:#f92672>}</span>
+</code></pre></div><p><img src=https://uploader.shimo.im/f/9QjAj62dWH3iDjHh.png alt=RouteLocator></p><p>类似RouteDefinitionLocator三个实现：</p><blockquote><ul><li>缓存：CachingRouteLocator： 缓存路由，查找时使用CompositeRouteLocator去查找</li><li>组合： CompositeRouteLocator：使用多个RouteLocator查找路由并合并</li><li>单个的 RouteDefinitionRouteLocator：最终使用RouteDefinitionLocator查找路由定义并转为路由对象Route
+单个路由的 filters = GlobalFilter + 默认GatewayFilter + 本路由配置的GatewayFilter</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RouteDefinitionRouteLocator</span>
+		<span style=color:#66d9ef>implements</span> RouteLocator<span style=color:#f92672>,</span> BeanFactoryAware<span style=color:#f92672>,</span> ApplicationEventPublisherAware <span style=color:#f92672>{</span>
+
+	 <span style=color:#f92672>...</span>
+ 
+	<span style=color:#66d9ef>public</span> <span style=color:#a6e22e>RouteDefinitionRouteLocator</span><span style=color:#f92672>(</span>RouteDefinitionLocator routeDefinitionLocator<span style=color:#f92672>,</span>
+			List<span style=color:#f92672>&lt;</span>RoutePredicateFactory<span style=color:#f92672>&gt;</span> predicates<span style=color:#f92672>,</span>
+			List<span style=color:#f92672>&lt;</span>GatewayFilterFactory<span style=color:#f92672>&gt;</span> gatewayFilterFactories<span style=color:#f92672>,</span>
+			GatewayProperties gatewayProperties<span style=color:#f92672>,</span>
+			ConfigurationService configurationService<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>routeDefinitionLocator</span> <span style=color:#f92672>=</span> routeDefinitionLocator<span style=color:#f92672>;</span><span style=color:#75715e>//fzb //设置路由定义定位器
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>configurationService</span> <span style=color:#f92672>=</span> configurationService<span style=color:#f92672>;</span>
+		initFactories<span style=color:#f92672>(</span>predicates<span style=color:#f92672>);</span><span style=color:#75715e>//fzb //初始化路由断言工厂
+</span><span style=color:#75715e></span>		gatewayFilterFactories<span style=color:#f92672>.</span><span style=color:#a6e22e>forEach</span><span style=color:#f92672>(</span>
+				factory <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>gatewayFilterFactories</span><span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>factory<span style=color:#f92672>.</span><span style=color:#a6e22e>name</span><span style=color:#f92672>(),</span> factory<span style=color:#f92672>));</span><span style=color:#75715e>//fzb //初始化网关过滤器
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>gatewayProperties</span> <span style=color:#f92672>=</span> gatewayProperties<span style=color:#f92672>;</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>...</span>
+ 
+   <span style=color:#75715e>//fzb  获取路由对象： 先获取RouteDefinition，再转为 Route
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>@Override</span>
+	<span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>Route<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRoutes</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+		Flux<span style=color:#f92672>&lt;</span>Route<span style=color:#f92672>&gt;</span> routes <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>routeDefinitionLocator</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span>
+				<span style=color:#f92672>.</span><span style=color:#a6e22e>map</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>::</span>convertToRoute<span style=color:#f92672>);</span><span style=color:#75715e>//fzb RouteDefinition转为 Route
+</span><span style=color:#75715e></span>        <span style=color:#f92672>...</span>
+	<span style=color:#f92672>}</span>
+	<span style=color:#75715e>//fzb 路由定义转为 路由
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> Route <span style=color:#a6e22e>convertToRoute</span><span style=color:#f92672>(</span>RouteDefinition routeDefinition<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+        <span style=color:#75715e>//fzb 1,将本路由定义中各个断言 与运算 合并为一个 AsyncPredicate
+</span><span style=color:#75715e></span>		AsyncPredicate<span style=color:#f92672>&lt;</span>ServerWebExchange<span style=color:#f92672>&gt;</span> predicate <span style=color:#f92672>=</span> combinePredicates<span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>);</span>
+        <span style=color:#75715e>//fzb 2, 获取所有的默认的过滤器和本路由定义的过滤器
+</span><span style=color:#75715e></span>		List<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> gatewayFilters <span style=color:#f92672>=</span> getFilters<span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>);</span>
+        <span style=color:#75715e>// 组装Route
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>return</span> Route<span style=color:#f92672>.</span><span style=color:#a6e22e>async</span><span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>).</span><span style=color:#a6e22e>asyncPredicate</span><span style=color:#f92672>(</span>predicate<span style=color:#f92672>)</span>
+				<span style=color:#f92672>.</span><span style=color:#a6e22e>replaceFilters</span><span style=color:#f92672>(</span>gatewayFilters<span style=color:#f92672>).</span><span style=color:#a6e22e>build</span><span style=color:#f92672>();</span>
+	<span style=color:#f92672>}</span>
+	<span style=color:#75715e>//fzb  过滤器定义filterDefinitions加载为过滤器GatewayFilter
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>@SuppressWarnings</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;unchecked&#34;</span><span style=color:#f92672>)</span>
+	List<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>loadGatewayFilters</span><span style=color:#f92672>(</span>String id<span style=color:#f92672>,</span>
+			List<span style=color:#f92672>&lt;</span>FilterDefinition<span style=color:#f92672>&gt;</span> filterDefinitions<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		ArrayList<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> ordered <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;(</span>filterDefinitions<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>());</span>
+		<span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> filterDefinitions<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>();</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+			FilterDefinition definition <span style=color:#f92672>=</span> filterDefinitions<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
+			GatewayFilterFactory factory <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>gatewayFilterFactories</span>
+					<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>factory <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+				<span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span>
+						<span style=color:#e6db74>&#34;Unable to find GatewayFilterFactory with name &#34;</span>
+								<span style=color:#f92672>+</span> definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+			<span style=color:#f92672>}</span>
+			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>logger<span style=color:#f92672>.</span><span style=color:#a6e22e>isDebugEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+				logger<span style=color:#f92672>.</span><span style=color:#a6e22e>debug</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;RouteDefinition &#34;</span> <span style=color:#f92672>+</span> id <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; applying filter &#34;</span>
+						<span style=color:#f92672>+</span> definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getArgs</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; to &#34;</span> <span style=color:#f92672>+</span> definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+			<span style=color:#f92672>}</span>
+
+			<span style=color:#75715e>// @formatter:off
+</span><span style=color:#75715e></span>			Object configuration <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>configurationService</span><span style=color:#f92672>.</span><span style=color:#a6e22e>with</span><span style=color:#f92672>(</span>factory<span style=color:#f92672>)</span>
+					<span style=color:#f92672>.</span><span style=color:#a6e22e>name</span><span style=color:#f92672>(</span>definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>())</span>
+					<span style=color:#f92672>.</span><span style=color:#a6e22e>properties</span><span style=color:#f92672>(</span>definition<span style=color:#f92672>.</span><span style=color:#a6e22e>getArgs</span><span style=color:#f92672>())</span>
+					<span style=color:#f92672>.</span><span style=color:#a6e22e>eventFunction</span><span style=color:#f92672>((</span>bound<span style=color:#f92672>,</span> properties<span style=color:#f92672>)</span> <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>new</span> FilterArgsEvent<span style=color:#f92672>(</span>
+							<span style=color:#75715e>// TODO: why explicit cast needed or java compile fails
+</span><span style=color:#75715e></span>							RouteDefinitionRouteLocator<span style=color:#f92672>.</span><span style=color:#a6e22e>this</span><span style=color:#f92672>,</span> id<span style=color:#f92672>,</span> <span style=color:#f92672>(</span>Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;)</span> properties<span style=color:#f92672>))</span>
+					<span style=color:#f92672>.</span><span style=color:#a6e22e>bind</span><span style=color:#f92672>();</span>
+			<span style=color:#75715e>// @formatter:on
+</span><span style=color:#75715e></span>
+			<span style=color:#75715e>// some filters require routeId
+</span><span style=color:#75715e></span>			<span style=color:#75715e>// TODO: is there a better place to apply this?
+</span><span style=color:#75715e></span>			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>configuration <span style=color:#66d9ef>instanceof</span> HasRouteId<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+				HasRouteId hasRouteId <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>HasRouteId<span style=color:#f92672>)</span> configuration<span style=color:#f92672>;</span>
+				hasRouteId<span style=color:#f92672>.</span><span style=color:#a6e22e>setRouteId</span><span style=color:#f92672>(</span>id<span style=color:#f92672>);</span>
+			<span style=color:#f92672>}</span>
+
+			GatewayFilter gatewayFilter <span style=color:#f92672>=</span> factory<span style=color:#f92672>.</span><span style=color:#a6e22e>apply</span><span style=color:#f92672>(</span>configuration<span style=color:#f92672>);</span>
+			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>gatewayFilter <span style=color:#66d9ef>instanceof</span> Ordered<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+				ordered<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span>gatewayFilter<span style=color:#f92672>);</span>
+			<span style=color:#f92672>}</span>
+			<span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+				ordered<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> OrderedGatewayFilter<span style=color:#f92672>(</span>gatewayFilter<span style=color:#f92672>,</span> i <span style=color:#f92672>+</span> 1<span style=color:#f92672>));</span>
+			<span style=color:#f92672>}</span>
+		<span style=color:#f92672>}</span>
+
+		<span style=color:#66d9ef>return</span> ordered<span style=color:#f92672>;</span>
+	<span style=color:#f92672>}</span>
+
+	<span style=color:#66d9ef>private</span> List<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getFilters</span><span style=color:#f92672>(</span>RouteDefinition routeDefinition<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		List<span style=color:#f92672>&lt;</span>GatewayFilter<span style=color:#f92672>&gt;</span> filters <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;();</span>
+		<span style=color:#75715e>//fzb 1,加上默认的过滤器
+</span><span style=color:#75715e></span>		<span style=color:#75715e>// TODO: support option to apply defaults after route specific filters?
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>gatewayProperties</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getDefaultFilters</span><span style=color:#f92672>().</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+			filters<span style=color:#f92672>.</span><span style=color:#a6e22e>addAll</span><span style=color:#f92672>(</span>loadGatewayFilters<span style=color:#f92672>(</span>DEFAULT_FILTERS<span style=color:#f92672>,</span>
+					<span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>gatewayProperties</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getDefaultFilters</span><span style=color:#f92672>())));</span>
+		<span style=color:#f92672>}</span>
+		<span style=color:#75715e>//fzb 2,加上本路由配置的过滤器
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span>routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getFilters</span><span style=color:#f92672>().</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+			filters<span style=color:#f92672>.</span><span style=color:#a6e22e>addAll</span><span style=color:#f92672>(</span>loadGatewayFilters<span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>(),</span>
+					<span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;&gt;(</span>routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getFilters</span><span style=color:#f92672>())));</span>
+		<span style=color:#f92672>}</span>
+		<span style=color:#75715e>//fzb 排序 按实现的Ordered接口
+</span><span style=color:#75715e></span>		AnnotationAwareOrderComparator<span style=color:#f92672>.</span><span style=color:#a6e22e>sort</span><span style=color:#f92672>(</span>filters<span style=color:#f92672>);</span>
+		<span style=color:#66d9ef>return</span> filters<span style=color:#f92672>;</span>
+	<span style=color:#f92672>}</span>
+	<span style=color:#75715e>//fzb combinePredicates主要是对找出来的predicate进行and操作
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> AsyncPredicate<span style=color:#f92672>&lt;</span>ServerWebExchange<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>combinePredicates</span><span style=color:#f92672>(</span>
+			RouteDefinition routeDefinition<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+		List<span style=color:#f92672>&lt;</span>PredicateDefinition<span style=color:#f92672>&gt;</span> predicates <span style=color:#f92672>=</span> routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getPredicates</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>predicates <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>||</span> predicates<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+			<span style=color:#75715e>// this is a very rare case, but possible, just match all
+</span><span style=color:#75715e></span>			<span style=color:#66d9ef>return</span> AsyncPredicate<span style=color:#f92672>.</span><span style=color:#a6e22e>from</span><span style=color:#f92672>(</span>exchange <span style=color:#f92672>-&gt;</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+		<span style=color:#f92672>}</span>
+		AsyncPredicate<span style=color:#f92672>&lt;</span>ServerWebExchange<span style=color:#f92672>&gt;</span> predicate <span style=color:#f92672>=</span> lookup<span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>,</span>
+				predicates<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>0<span style=color:#f92672>));</span>
+
+		<span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span>PredicateDefinition andPredicate <span style=color:#f92672>:</span> predicates<span style=color:#f92672>.</span><span style=color:#a6e22e>subList</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span>
+				predicates<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()))</span> <span style=color:#f92672>{</span>
+			AsyncPredicate<span style=color:#f92672>&lt;</span>ServerWebExchange<span style=color:#f92672>&gt;</span> found <span style=color:#f92672>=</span> lookup<span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>,</span>
+					andPredicate<span style=color:#f92672>);</span>
+			predicate <span style=color:#f92672>=</span> predicate<span style=color:#f92672>.</span><span style=color:#a6e22e>and</span><span style=color:#f92672>(</span>found<span style=color:#f92672>);</span><span style=color:#75715e>//fzb and 各个断言 	与 合并为一个 AsyncPredicate
+</span><span style=color:#75715e></span>		<span style=color:#f92672>}</span>
+
+		<span style=color:#66d9ef>return</span> predicate<span style=color:#f92672>;</span>
+	<span style=color:#f92672>}</span>
+
+	 <span style=color:#f92672>...</span>
+
+<span style=color:#f92672>}</span>
+</code></pre></div><h4 id=类比>类比</h4><ul><li>Route -> RouteDefinition ->RouteDefinitionLocator -> xxxRouteDefinitionRepository</li><li>Bean -> BeanDefinition -> BeanDefinitionRegistry -> DefaultListableBeanFactory#Map&lt;String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap&lt;>(256);</li></ul></div><div class=btn-improve-page><a href=https://github.com/fengzhenbing/fengzhenbing.github.io/edit/master/content/posts/SpringCloudGateway/content/05.route%e8%b7%af%e7%94%b1%e7%9a%84%e9%85%8d%e7%bd%ae%e5%8a%a0%e8%bd%bd.md><i class="fas fa-code-branch"></i>改善此页面</a></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/springcloudgateway/content/04.scg-%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/ class="btn btn-outline-info"><span><i class="fas fa-chevron-circle-left"></i>上一篇</span><br><span>04.scg 一次请求的执行过程</span></a></div><div class="col-md-6 next-article"><a href=/posts/springcloudgateway/content/06.route%E9%80%9A%E8%BF%87%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/ class="btn btn-outline-info"><span>下一篇 <i class="fas fa-chevron-circle-right"></i></span><br><span>06.route通过注册中心自动配置加载</span></a></div></div><hr></div></div></div></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">目录</h5><hr><div class=toc><nav id=TableOfContents><ul><li><ul><li><a href=#route路由的配置加载>route路由的配置加载</a><ul><li><a href=#0相关配置>0.相关配置</a></li><li><a href=#1路由定义>1.路由定义</a></li><li><a href=#2路由>2.路由</a></li><li><a href=#类比>类比</a></li></ul></li></ul></li></ul></nav></div></div></section></div><footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>导航</h5><ul><li class=nav-item><a class=smooth-scroll href=#about>简介</a></li><li class=nav-item><a class=smooth-scroll href=#skills>技能</a></li><li class=nav-item><a class=smooth-scroll href=#projects>项目</a></li><li class=nav-item><a class=smooth-scroll href=#recent-posts>最近文章</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>联系方式:</h5><ul><li><span>电话:</span> <span>+8615380837691</span></li><li><span>邮箱:</span> <span>595611161@qq.com</span></li></ul></div><div class="col-md-4 col-sm-12"><p>通过电子邮件接收最新信息</p><form><div class=form-group><input type=email class=form-control id=exampleInputEmail1 aria-describedby=emailHelp placeholder="填入 E-mail">
+<small id=emailHelp class="form-text text-muted">我们绝不会与任何人共享您的电子邮件。</small></div><button type=submit class="btn btn-info">提交</button></form></div></div></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hossainemruz/toha target=#><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_2.png>
+Toha</a></div><div class="col-md-4 text-center">© 2008 - 2021 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/js/jquery-3.4.1.min.js></script><script src=/js/popper.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/navbar.js></script><script src=/js/main.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script><script src=/js/single.js></script><script>hljs.initHighlightingOnLoad();</script></body></html>
