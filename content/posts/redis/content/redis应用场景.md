@@ -114,7 +114,7 @@ menu:
 2. Redis Stream 是 Redis 5.0 版本新增加的数据结构。
    Redis Stream 主要用于消息队列(MQ，Message Queue)。 
 
-   具体可以参考 https://www.runoob.com/redis/redis-stream.html
+   具体可以参考 [https://www.runoob.com/redis/redis-stream.html](https://www.runoob.com/redis/redis-stream.html)
 
 ### 六.分布式锁*
 
@@ -143,4 +143,4 @@ return 0 end
 
 
 
-更多细节：https://www.cnblogs.com/yunlongaimeng/p/10266690.html
+更多细节：[https://www.cnblogs.com/yunlongaimeng/p/10266690.html](https://www.cnblogs.com/yunlongaimeng/p/10266690.html)
