@@ -1,16 +1,32 @@
 ---
-title: "redis数据结构"
+title: "redis基础"
 date: 2020-12-11T08:06:25+06:00
-description: redis数据结构
+description: redis基础
 menu:
   sidebar:
     parent: redis
-    name: redis数据结构
+    name: redis基础
     identifier: redis2
     weight: 2
 ---
 
-### redis-benchmark
+#### redis线程
+
+redis做为一个进程，一直是多线程的。处理io和处理内存的是不同线程。
+
+* io线程
+
+  * redis6之前(2020.05)：io处理是单线程
+
+  * redis6：io处理多线程，采用nio模型    => 主要的性能提升点
+
+* 内存处理线程
+
+  * 单线程  =>高性能核心，不用考虑线程调度
+
+    
+
+### 压测redis-benchmark
 
 - 环境mac 4核8g
 
@@ -35,7 +51,7 @@ https://redis.io/commands
 Redis中字符串类型的value最多可以容纳的数据长度是512M
 
 ```
-set/get/getset/del/exists/append incr/decr/incrby/decrby
+set/get/setnx/getset/del/exists/append incr/decr/incrby/decrby
 ```
 
 
@@ -75,6 +91,8 @@ java的set，不重复的list
 
 ```
 sadd/srem/smembers/sismember  类比java中set的add, remove, all,  contains, 
+spop key [count] 随机返回集合中一个或多个 移除
+SRANDMEMBER key [count] 返回集合中一个或多个随机数，不移除, 抽奖
 sdiff/sinter/sunion  集合求差集，求交集，求并集
 ```
 
@@ -100,7 +118,7 @@ zremrangebyrank key start stop : 按照排名范围删除元素
 
 ### redis高级数据结构
 
-#### Bitmaps
+#### 1.Bitmaps
 
 bitmaps不是一个真实的数据结构。而是String类型上的一组面向bit操作的集合。由于 strings是二进制安全的blob，并且它们的最大长度是512m，所以bitmaps能最大设置 2^32个不同的bit。
 
@@ -112,7 +130,7 @@ setbit/getbit/bitop/bitcount/bitpos
 
 
 
-#### HyperLogLog
+#### 2.HyperLogLog
 
 Redis  是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定 的、并且是很小的。
 
@@ -143,14 +161,12 @@ OK
 
 
 
-应用场景
+应用场景说明：
 
-说明：
-
-- 基数不大，数据量不大就用不上，会有点大材小用浪费空间
-- 有局限性，就是只能统计基数数量，而没办法去知道具体的内容是什么
-- 和bitmap相比，属于两种特定统计情况，简单来说，HyperLogLog 去重比 bitmap 方便很多
-- 一般可以bitmap和hyperloglog配合使用，bitmap标识哪些用户活跃，hyperloglog计数
+* 基数不大，数据量不大就用不上，会有点大材小用浪费空间
+* 有局限性，就是只能统计基数数量，而没办法去知道具体的内容是什么
+* 和bitmap相比，属于两种特定统计情况，简单来说，HyperLogLog 去重比 bitmap 方便很多
+* 一般可以bitmap和hyperloglog配合使用，bitmap标识哪些用户活跃，hyperloglog计数
 
 一般使用：
 
@@ -162,12 +178,70 @@ OK
 
 
 
-#### GEO
+#### 3.GEO
 
 ```
 geoadd/geohash/geopos/geodist/georadius/georadiusbymember
 ```
 
-
-
 Redis的GEO特性在 Redis3.2版本中推出，这个功能可以将用户给定的地理位置(经 度和纬度)信息储存起来，并对这些信息进行操作。
+
+### Redis Lua
+
+* 类比openrestry = nginx + lua jit 
+
+* 类似于数据库的存储过程，mongodb的js脚本
+
+  * 直接执行
+     eval "return'hello java'" 0
+     eval "redis.call('set',KEYS[1],ARGV[1])" 1 lua-key lua-value
+
+    ```
+    127.0.0.1:6379> eval "return'hello java'" 0
+    "hello java"
+    127.0.0.1:6379> eval "redis.call('set',KEYS[1],ARGV[1])" 1 ff zz
+    (nil)
+    127.0.0.1:6379> get ff
+    "zz"
+    ```
+
+    
+
+  *  预编译
+     script load script脚本片段
+     返回一个SHA-1签名 shastring
+     evalsha shastring keynum [key1 key2 key3 ...] [param1 param2 param3 ...]
+
+    ```
+    127.0.0.1:6379> script load "redis.call('set',KEYS[1],ARGV[1])"
+    "7cfb4342127e7ab3d63ac05e0d3615fd50b45b06"
+    127.0.0.1:6379> evalsha 7cfb4342127e7ab3d63ac05e0d3615fd50b45b06 1 fff zzz
+    (nil)
+    127.0.0.1:6379> get fff
+    "zzz"
+    ```
+
+    
+
+### 几个缓存问题
+
+#### 缓存穿透
+
+* 现象：key对应的数据在数据源并不存在，每次针对此key的请求从缓存获取不到，请求都会到数据源，从而可能压垮数据源。比如用一个不存在的用户id获取用户信息，不论缓存还是数据库都没有，若黑客利用此漏洞进行攻击可能压垮数据库
+* 解决：
+  * 采用布隆过滤器：将所有可能存在的数据哈希到一个足够大的bitmap中，一个一定不存在的数据会被 这个bitmap拦截掉，从而避免了对底层存储系统的查询压力，详见https://www.cnblogs.com/rinack/p/9712477.html
+  * 直接缓存空结果：如果一个查询返回的数据为空，仍然把这个空结果进行缓存。
+
+#### 缓存击穿
+
+* 现象：key对应的数据存在，但在redis中过期，此时若有大量并发请求过来，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把后端DB压垮。
+* 解决：使用**互斥分布式锁**进行从DB加载数据，其他的请求继续重试缓存。使用锁可能会死锁、线程池阻塞等问题，针对高热点key，最好是在并发量最小的时候，写定时器更新key的过期时间
+
+#### 缓存雪崩
+
+* 现象：当缓存服务器重启或者大量缓存集中在某一个时间段失效，这样在失效的时候，也会给后端系统(比如DB)带来很大压力。与缓存击穿的区别在于这里针对很多key缓存，前者则是某一个key。
+* 解决：
+  * 最简单尽量将过期时间分散开来：可以在原有的失效时间基础上增加一个随机值，比如1-5分钟随机，
+  * 设置过期标志更新缓存:  
+    * 1，新加一个缓存key的标记。缓存数据key的value时，同时缓存key_sign, key_sign的过期时间小于key的过期时间。
+    * 2 在查询缓存时，先判断key_sign是否过期，a，如果过期，先直接返回value，再启用异步线程去更新key_sign以及加载db到key的value,重新设置两个的过期时间。b. 没有过期，直接返回value
