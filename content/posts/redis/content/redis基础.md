@@ -192,9 +192,11 @@ Redis的GEO特性在 Redis3.2版本中推出，这个功能可以将用户给定
 
 * 类似于数据库的存储过程，mongodb的js脚本
 
+* redis内存操作的单线程 使得一段lua脚本之心具有：**原子性**，操作不会被打断，保证了**事务**
+
   * 直接执行
-     eval "return'hello java'" 0
-     eval "redis.call('set',KEYS[1],ARGV[1])" 1 lua-key lua-value
+    eval "return'hello java'" 0
+    eval "redis.call('set',KEYS[1],ARGV[1])" 1 lua-key lua-value
 
     ```
     127.0.0.1:6379> eval "return'hello java'" 0
@@ -207,10 +209,10 @@ Redis的GEO特性在 Redis3.2版本中推出，这个功能可以将用户给定
 
     
 
-  *  预编译
-     script load script脚本片段
-     返回一个SHA-1签名 shastring
-     evalsha shastring keynum [key1 key2 key3 ...] [param1 param2 param3 ...]
+  * 预编译
+    script load script脚本片段
+    返回一个SHA-1签名 shastring
+    evalsha shastring keynum [key1 key2 key3 ...] [param1 param2 param3 ...]
 
     ```
     127.0.0.1:6379> script load "redis.call('set',KEYS[1],ARGV[1])"
@@ -221,7 +223,82 @@ Redis的GEO特性在 Redis3.2版本中推出，这个功能可以将用户给定
     "zzz"
     ```
 
-    
+  
+
+### redis事务
+
+* 开启事务:multi 
+
+* 命令入队 
+
+* 执行事务:exec 
+
+* 撤销事务:discard
+* Watch 监控事务： watch 一个key，发生变化则事务失败
+* unwatch 取消监听
+
+```
+127.0.0.1:6379> multi
+OK
+127.0.0.1:6379> set ff ff
+QUEUED
+127.0.0.1:6379> set fff fff
+QUEUED
+127.0.0.1:6379> exec
+1) OK
+2) OK
+```
+
+
+
+### redis管道
+
+
+
+### redis备份恢复机制
+
+#### RDB方式
+
+* 快照恢复，类似mysql的frm.等数据：备份当前瞬间 Redis 在内存中的数据记录
+
+* save后在数据目录生成dump.rdb
+
+* bgsave 异步执行备份
+
+  ![img](http://pics5.baidu.com/feed/1c950a7b02087bf43b4490d50ac25f2a11dfcf7e.jpeg?token=22f387ba78130c6115420059481b2393&s=EF48A15796784D8816E1D9EB03007024)
+
+* 恢复：将备份文件 (dump.rdb) 移动到 redis 数据目录并启动服务即可
+
+redis.conf中
+
+```
+#Redis默认配置文件中提供了三个备份条件： ##指定在多长时间内，有多少次更新操作，就将数据同步到数据文件，可以多个条件配合
+save 900 1
+save 300 10
+save 60 10000
+```
+
+#### AOF方式
+
+* 追加文件（Append-Only File，AOF） 类比mysql的binlog 
+* 配置为 always，其含义为当 Redis 执行 命令的时候，则同时同步到 AOF 文件，这样会使得 Redis 同步刷新 AOF 文件，造成 缓慢。而采用 evarysec 则代表每秒同步一次命令到 AOF 文件
+
+```
+appendfilename "appendonly.aof" 
+# appendfsync always
+ appendfsync everysec
+# appendfsync no......
+```
+
+
+
+![img](http://pics5.baidu.com/feed/b17eca8065380cd7df69859ba056a5325982816c.jpeg?token=a060f459d81c409c3d6c7208d2118888&s=AF4AA5574ED85CC841D04BE60300A036)
+
+
+
+* 恢复：自动加载
+
+
 
 ### 几个缓存问题
 
