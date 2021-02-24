@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>soul on Feng Zhenbing's Blog</title><link>https://fengzhenbing.github.io/posts/soul/</link><description>Recent content in soul on Feng Zhenbing's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 13 Oct 2020 08:06:25 +0600</lastBuildDate><atom:link href="https://fengzhenbing.github.io/posts/soul/index.xml" rel="self" type="application/rss+xml"/><item><title>01.soul整体结构</title><link>https://fengzhenbing.github.io/posts/soul/content/1.0%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84/</link><pubDate>Thu, 10 Dec 2020 08:06:25 +0600</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/1.0%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84/</guid><description>soul介绍 官网
+高性能，多协议，易扩展，响应式的API Gateway 丰富的协议 支持 dubbo ，tars， springcloud grpc。 插件化 插件化设计思想，插件热插拔，易扩展。 流控 灵活的流量筛选，能满足各种流量控制。 内置插件 内置丰富的插件支持，鉴权，限流，熔断，防火墙等。 高性能 流量配置动态化，性能极高，网关消耗在 1~2ms。 集群部署 支持集群部署，支持 A/B Test，蓝绿发布。 soul项目结构 soul-admin
+soul网关管理端，配合soul-dashbord
+Soul-bootstrap
+网关启动工程： 实际引入soul-spring-boot-starter-gateway(soul-web)
+Soul-client
+为下游服务提供者提供各类服务接入网关soul的客户端
+Soul-client-common Soul-client-dubbo Soul-client-grpc Soul-client-http Soul-client-sofa Soul-client-tars Soul-common
+Soul-dashbord</description></item></channel></rss>
