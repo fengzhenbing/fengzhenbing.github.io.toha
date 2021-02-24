@@ -1,6 +1,6 @@
 ---
 title: "miniProgram"
-date: 2021-02-24T09:06:25+06:00
+date: 2021-02-23T09:06:25+06:00
 description: miniProgram
 menu:
   sidebar:
