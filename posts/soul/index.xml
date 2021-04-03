@@ -6,4 +6,7 @@ Soul-bootstrap
 Soul-client
 为下游服务提供者提供各类服务接入网关soul的客户端
 Soul-client-common Soul-client-dubbo Soul-client-grpc Soul-client-http Soul-client-sofa Soul-client-tars Soul-common
-Soul-dashbord</description></item></channel></rss>
+Soul-dashbord</description></item><item><title/><link>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</guid><description>模版方法 AbstractXXX
+观察者 数据同步模块
+责任链 插件链路执行</description></item><item><title/><link>https://fengzhenbing.github.io/posts/soul/content/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</guid><description>![image-20210310194848831](/Users/mokernet/Library/Application Support/typora-user-images/image-20210310194848831.png)
+![image-20210310194828007](/Users/mokernet/Library/Application Support/typora-user-images/image-20210310194828007.png)</description></item></channel></rss>

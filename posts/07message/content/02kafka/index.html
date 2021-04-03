@@ -1,0 +1,78 @@
+<!doctype html><html><head><title>kafka基础</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="ie=edge"><link rel=stylesheet href=/css/bootstrap.min.css><link rel=stylesheet href=/css/layouts/main.css><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/navigators/navbar.css><link href="https://fonts.googleapis.com/css2?family=Muli:wght@300;400;500;600" rel=stylesheet><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css><link rel=icon type=image/png href=/images/favicon_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png><link rel=stylesheet href=/css/style.css><meta name=description content="kafka基础"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/atom-one-dark.min.css><link rel=stylesheet href=/css/layouts/single.css><link rel=stylesheet href=/css/navigators/sidebar.css></head><body data-spy=scroll data-target=#TableOfContents data-offset=80><div class="container-fluid bg-dimmed wrapper"><nav class="navbar navbar-expand-xl top-navbar final-navbar shadow"><div class=container><button class="navbar-toggler navbar-light" id=sidebar-toggler type=button onclick=toggleSidebar()>
+<span class=navbar-toggler-icon></span></button>
+<a class=navbar-brand href=/><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png>Feng Zhenbing's Blog</a>
+<button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"></ul></div></div><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png class=d-none id=main-logo>
+<img src=/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png class=d-none id=inverted-logo></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><input type=text placeholder=Search data-search id=search-box><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts data-filter=all>博文</a></li><div class=subtree><li><a href=/posts/introduction/>Hugo搭建博客</a></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/07message/>message</a><ul class=active><li><a href=/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/>消息基础</a></li><li><a class=active href=/posts/07message/content/02kafka/>kafka基础</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/miniprogram/>miniProgram</a><ul><li><a href=/posts/miniprogram/content/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/>小程序框架</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/redis/>redis</a><ul><li><a href=/posts/redis/content/redis%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C/>安装redis</a></li><li><a href=/posts/redis/content/redis%E5%9F%BA%E7%A1%80/>redis基础</a></li><li><a href=/posts/redis/content/redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/>redis应用场景</a></li><li><a href=/posts/redis/content/hazelcast/>hazelcast</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/springcloudgateway/>spring cloud gateway</a><ul><li><a href=/posts/springcloudgateway/content/01.gateway%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91/>01.gateway整体逻辑</a></li><li><a href=/posts/springcloudgateway/content/02.reactor%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/>02.reactor响应式编程学习</a></li><li><a href=/posts/springcloudgateway/content/03.scg-nettywebserver%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/>03.scg NettyWebServer启动过程</a></li><li><a href=/posts/springcloudgateway/content/04.scg-%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/>04.scg 一次请求的执行过程</a></li><li><a href=/posts/springcloudgateway/content/05.route%E8%B7%AF%E7%94%B1%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>05.route路由的配置加载</a></li><li><a href=/posts/springcloudgateway/content/06.route%E9%80%9A%E8%BF%87%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>06.route通过注册中心自动配置加载</a></li><li><a href=/posts/springcloudgateway/content/07.precidate%E7%9A%84%E5%AF%B9%E8%B7%AF%E7%94%B1%E8%BF%9B%E8%A1%8C%E9%80%89%E6%8B%A9/>07.precidate的对路由进行选择</a></li><li><a href=/posts/springcloudgateway/content/08.filter%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%8F%8A%E5%90%88%E5%B9%B6/>08.filter的配置加载及合并</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/soul/>soul</a><ul><li><a href=/posts/soul/content/1.0%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84/>01.soul整体结构</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://fengzhenbing.github.io/images/default-hero.jpg)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/author/fzb.jpeg><h5 class=author-name>冯振兵</h5><p>October 20, 2020</p></div><div class=title><h1>kafka基础</h1></div><div class=post-content id=post-content><h3 id=topic特性>Topic特性</h3><ol><li>通过partition增加可扩展性：线上改partion数，rebalance ，会照成性能抖动。</li><li>partition有序达到高吞吐</li><li>partition多副本增加容错性</li></ol><h3 id=kafka单机>kafka单机</h3><ol><li><p>安装 <a href=http://kafka.apache.org/downloads>http://kafka.apache.org/downloads</a></p></li><li><p>修改配置</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>cd kafka_2.13-2.7.0
+<span style=color:#75715e># 打开 listeners=PLAINTEXT://localhost:9092</span>
+vim config/server.properties
+<span style=color:#75715e># 启动zookeeper</span>
+bin/zookeeper-server-start.sh config/zookeeper.properties 
+<span style=color:#75715e># 启动kafaka</span>
+bin/kafka-server-start.sh config/server.properties
+</code></pre></div></li><li><p>命令测试</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 创建topic</span>
+mokernetdeMac-mini:kafka_2.13-2.7.0 mokernet$ bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic testf  --partitions <span style=color:#ae81ff>4</span> --replication-factor <span style=color:#ae81ff>1</span>
+Created topic testf.
+   
+<span style=color:#75715e># 查看</span>
+bin/kafka-topics.sh --zookeeper localhost:2181 --describe --topic testf
+   
+<span style=color:#75715e># 消费者从头开始消费</span>
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --topic testf
+   
+<span style=color:#75715e># 生产者生产</span>
+bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic testf
+   
+<span style=color:#75715e># 生产者性能测试 100万条数据 每条1000byte 限流100万条</span>
+bin/kafka-producer-perf-test.sh --topic testf --num-records <span style=color:#ae81ff>1000000</span> --record-size <span style=color:#ae81ff>1000</span> --throughput <span style=color:#ae81ff>1000000</span> --producer-props bootstrap.servers<span style=color:#f92672>=</span>localhost:9092
+   
+<span style=color:#75715e># 消费者性能测试   消费100万条数据  一个线程</span>
+bin/kafka-consumer-perf-test.sh --bootstrap-server localhost:9092 --topic testf --fetch-size <span style=color:#ae81ff>1048576</span> --messages <span style=color:#ae81ff>1000000</span> --threads <span style=color:#ae81ff>1</span>
+</code></pre></div></li></ol><h3 id=kafka集群>kafka集群</h3><ol><li><p>修改各个节点的三个属性配置如下：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 复制新的配置文件</span>
+cp config/server.properties config/server-1.properties
+cp config/server.properties config/server-2.properties
+</code></pre></div><pre><code class=language-properties data-lang=properties># 修改 id  端口 数据文件目录
+# config/server-1.properties:
+  broker.id=1
+  listeners=PLAINTEXT://:9093
+  log.dir=/tmp/kafka-logs-1
+</code></pre><pre><code class=language-properties data-lang=properties># 修改 id  端口 数据文件目录
+# config/server-2.properties:
+  broker.id=2
+  listeners=PLAINTEXT://:9094
+  log.dir=/tmp/kafka-logs-2
+</code></pre></li><li><p>启动</p><pre><code>bin/kafka-server-start.sh config/server.properties &amp;
+bin/kafka-server-start.sh config/server-1.properties &amp;
+bin/kafka-server-start.sh config/server-2.properties &amp;
+</code></pre></li><li><p>测试</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#75715e># 创建topic test42 4个patition 2个副本</span>
+bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic test42  --partitions <span style=color:#ae81ff>4</span> --replication-factor <span style=color:#ae81ff>2</span>
+<span style=color:#75715e># 查看</span>
+mokernetdeMac-mini:kafka_2.13-2.7.0 mokernet$ bin/kafka-topics.sh --zookeeper localhost:2181 --describe --topic test42
+Topic: test42   PartitionCount: <span style=color:#ae81ff>4</span>       ReplicationFactor: <span style=color:#ae81ff>2</span>    Configs: 
+        Topic: test42   Partition: <span style=color:#ae81ff>0</span>    Leader: <span style=color:#ae81ff>1</span>       Replicas: 1,2   Isr: 1,2
+        Topic: test42   Partition: <span style=color:#ae81ff>1</span>    Leader: <span style=color:#ae81ff>2</span>       Replicas: 2,0   Isr: 2,0
+        Topic: test42   Partition: <span style=color:#ae81ff>2</span>    Leader: <span style=color:#ae81ff>0</span>       Replicas: 0,1   Isr: 0,1
+        Topic: test42   Partition: <span style=color:#ae81ff>3</span>    Leader: <span style=color:#ae81ff>1</span>       Replicas: 1,0   Isr: 1,0
+           
+<span style=color:#75715e># 消费者从头开始消费</span>
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --topic test42
+   
+<span style=color:#75715e># 生产者生产</span>
+bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test42
+   
+<span style=color:#75715e># 容错性测试 ，关闭id=1的broker</span>
+ps aux | grep server-1.properties
+&gt; mokernet         <span style=color:#ae81ff>30302</span>   0.0  1.9  <span style=color:#ae81ff>7323756</span> <span style=color:#ae81ff>405020</span> s006  S+   10:31PM   0:16.87 /usr/bin/java -Xmx
+kill -9 <span style=color:#ae81ff>30302</span>
+   
+<span style=color:#75715e>#查看 如下，rebalance</span>
+mokernetdeMac-mini:kafka_2.13-2.7.0 mokernet$ bin/kafka-topics.sh --zookeeper localhost:2181 --describe --topic test42
+Topic: test42   PartitionCount: <span style=color:#ae81ff>4</span>       ReplicationFactor: <span style=color:#ae81ff>2</span>    Configs: 
+        Topic: test42   Partition: <span style=color:#ae81ff>0</span>    Leader: <span style=color:#ae81ff>2</span>       Replicas: 1,2   Isr: <span style=color:#ae81ff>2</span>
+        Topic: test42   Partition: <span style=color:#ae81ff>1</span>    Leader: <span style=color:#ae81ff>2</span>       Replicas: 2,0   Isr: 2,0
+        Topic: test42   Partition: <span style=color:#ae81ff>2</span>    Leader: <span style=color:#ae81ff>0</span>       Replicas: 0,1   Isr: <span style=color:#ae81ff>0</span>
+        Topic: test42   Partition: <span style=color:#ae81ff>3</span>    Leader: <span style=color:#ae81ff>0</span>       Replicas: 1,0   Isr: <span style=color:#ae81ff>0</span>
+</code></pre></div></li></ol><h3 id=kafka-connect>Kafka connect</h3><h3 id=kafak-stream>kafak stream</h3></div><div class=btn-improve-page><a href=https://github.com/fengzhenbing/fengzhenbing.github.io/edit/master/content/posts/07message/content/02kafka.md><i class="fas fa-code-branch"></i>改善此页面</a></div><hr><div class="row next-prev-navigator"><div class="col-md-6 previous-article"><a href=/posts/introduction/ class="btn btn-outline-info"><span><i class="fas fa-chevron-circle-left"></i>上一篇</span><br><span>Hugo搭建博客</span></a></div><div class="col-md-6 next-article"><a href=/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/ class="btn btn-outline-info"><span>下一篇 <i class="fas fa-chevron-circle-right"></i></span><br><span>消息基础</span></a></div></div><hr></div></div></div></section><section class=toc-section id=toc-section><div class=toc-holder><h5 class="text-center pl-3">目录</h5><hr><div class=toc><nav id=TableOfContents><ul><li><ul><li><a href=#topic特性>Topic特性</a></li><li><a href=#kafka单机>kafka单机</a></li><li><a href=#kafka集群>kafka集群</a></li><li><a href=#kafka-connect>Kafka connect</a></li><li><a href=#kafak-stream>kafak stream</a></li></ul></li></ul></nav></div></div></section></div><footer class="container-fluid text-center align-content-center footer pb-2"><div class="container pt-5"><div class="row text-left"><div class="col-md-4 col-sm-12"><h5>导航</h5><ul><li class=nav-item><a class=smooth-scroll href=#about>简介</a></li><li class=nav-item><a class=smooth-scroll href=#skills>技能</a></li><li class=nav-item><a class=smooth-scroll href=#projects>项目</a></li><li class=nav-item><a class=smooth-scroll href=#recent-posts>最近文章</a></li></ul></div><div class="col-md-4 col-sm-12"><h5>联系方式:</h5><ul><li><span>电话:</span> <span>+8615380837691</span></li><li><span>邮箱:</span> <span>595611161@qq.com</span></li></ul></div><div class="col-md-4 col-sm-12"><p>通过电子邮件接收最新信息</p><form><div class=form-group><input type=email class=form-control id=exampleInputEmail1 aria-describedby=emailHelp placeholder="填入 E-mail">
+<small id=emailHelp class="form-text text-muted">我们绝不会与任何人共享您的电子邮件。</small></div><button type=submit class="btn btn-info">提交</button></form></div></div></div><hr><div class=container><div class="row text-left"><div class=col-md-4><a id=theme href=https://github.com/hossainemruz/toha target=#><img src=/images/theme-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_32x0_resize_box_2.png>
+Toha</a></div><div class="col-md-4 text-center">© 2008 - 2021 Copyright.</div><div class="col-md-4 text-right"><a id=hugo href=https://gohugo.io/>Powered by
+<img src=/images/hugo-logo.svg alt="Hugo Logo" height=18></a></div></div></div></footer><script src=/js/jquery-3.4.1.min.js></script><script src=/js/popper.min.js></script><script src=/js/bootstrap.min.js></script><script src=/js/navbar.js></script><script src=/js/main.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js></script><script src=/js/single.js></script><script>hljs.initHighlightingOnLoad();</script></body></html>
