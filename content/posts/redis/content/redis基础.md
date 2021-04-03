@@ -300,6 +300,16 @@ appendfilename "appendonly.aof"
 
 
 
+### redis性能优化
+
+```shell
+slowlog get 10
+```
+
+
+
+
+
 ### 几个缓存问题
 
 #### 缓存穿透
