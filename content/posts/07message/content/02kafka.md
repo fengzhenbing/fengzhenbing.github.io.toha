@@ -10,6 +10,26 @@ menu:
     weight: 2
 ---
 
+
+
+### kafka相关概念
+
+二代mq, scala开发
+
+- broker
+- topic
+- patition
+- producer
+- customer
+- Customer group
+- leader 
+- follower
+- rebalance
+  - 服务端partition数量扩大
+  - 消费者组中某个消费者down掉
+
+
+
 ### Topic特性
 
 1. 通过partition增加可扩展性：线上改partion数，rebalance ，会照成性能抖动。
@@ -132,9 +152,49 @@ menu:
 
 ### Kafka connect
 
+- 通过kafka导入导出数据
+
+```shell
+# 写入数据到输入文件 test.txt
+echo -e "testtest" > test.txt
+# 启动connect
+# 三个配置文件： 
+# 1. Kafka Connect的配置文件，包含常用的配置，如Kafka brokers连接方式和数据的序列化格式。
+# 2. 源连接器配置，用于从输入文件读取行，并将其输入到 Kafka topic
+# 3. 接收器连接器配置，它从Kafka topic中读取消息，并在输出文件中生成一行。
+bin/connect-standalone.sh config/connect-standalone.properties config/connect-file-source.properties config/connect-file-sink.properties
+# 查看输出文件， 可以看到不断地往 test.txt写入数据时，test.sink.txt 会持续产生数据
+tail -f test.sink.txt 
+```
+
 
 
 ### kafak stream
 
 
 
+- - 
+
+### Kafka 特点
+
+- 高吞吐量、低延迟：kafka每秒可以处理几十万条消息，它的延迟最低只有几毫秒；
+- 可扩展性：kafka集群支持热扩展；
+- 持久性、可靠性：消息被持久化到本地磁盘，并且支持数据备份防止丢失；
+- 容错性：允许集群中的节点失败(若分区副本数量为n,则允许n-1个节点失败)；
+- 高并发：单机可支持数千个客户端同时读写；
+
+### 使用场景
+
+- 消息系统
+
+- 日志聚合
+- 度量监控
+- 流式处理
+- 跟踪网站浏览记录
+
+
+
+### 相关资料
+参考 https://kafka.apachecn.org/
+
+[大白话 kafka 架构原理](https://mp.weixin.qq.com/s?__biz=MzU1NDA0MDQ3MA==&mid=2247483958&idx=1&sn=dffaad318b50f875eea615bc3bdcc80c&chksm=fbe8efcfcc9f66d9ff096fbae1c2a3671f60ca4dc3e7412ebb511252e7193a46dcd4eb11aadc&scene=21#wechat_redirect)
