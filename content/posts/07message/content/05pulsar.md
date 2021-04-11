@@ -12,7 +12,8 @@ menu:
 
 ### 相关概念
 
-
+- 计算存储分离
+- ![image-20210406220312072](/Users/mokernet/Library/Application Support/typora-user-images/image-20210406220312072.png)
 
 ### 安装测试
 
