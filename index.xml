@@ -49,7 +49,30 @@ React vue &amp;hellip;
 broker topic patition producer customer Customer group leader follower rebalance 服务端partition数量扩大 消费者组中某个消费者down掉 Topic特性 通过partition增加可扩展性：线上改partion数，rebalance ，会照成性能抖动。 partition有序达到高吞吐 partition多副本增加容错性 kafka单机 安装 http://kafka.apache.org/downloads
 修改配置
 cd kafka_2.13-2.7.0 # 打开 listeners=PLAINTEXT://localhost:9092 vim config/server.properties # 启动zookeeper bin/zookeeper-server-start.sh config/zookeeper.properties # 启动kafaka bin/kafka-server-start.sh config/server.properties 命令测试
-# 创建topic mokernetdeMac-mini:kafka_2.13-2.7.0 mokernet$ bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic testf --partitions 4 --replication-factor 1 Created topic testf. # 查看 bin/kafka-topics.</description></item><item><title>消息基础</title><link>https://fengzhenbing.github.io/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/</link><pubDate>Sun, 11 Oct 2020 09:16:25 +0600</pubDate><guid>https://fengzhenbing.github.io/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/</guid><description>消息队列作用 异步通信：异步通信，减少线程等待，特别是处理批量等大事务、耗时操作。 系统解耦:系统不直接调用，降低依赖，特别是不在线也能保持通信最终完成。 削峰填谷:压力大的时候，缓冲部分请求消息，类似于背压处理。 可靠通信:提供多种消息模式、服务质量、顺序保障等。 消息处理模式 点对点： PTP =&amp;gt; queue 发布订阅： PubSub =&amp;gt; Topic 消息语义 QOS At most once At least once Exactly once</description></item><item><title/><link>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</guid><description>模版方法 AbstractXXX
+# 创建topic mokernetdeMac-mini:kafka_2.13-2.7.0 mokernet$ bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic testf --partitions 4 --replication-factor 1 Created topic testf. # 查看 bin/kafka-topics.</description></item><item><title>消息基础</title><link>https://fengzhenbing.github.io/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/</link><pubDate>Sun, 11 Oct 2020 09:16:25 +0600</pubDate><guid>https://fengzhenbing.github.io/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/</guid><description>消息队列作用 异步通信：异步通信，减少线程等待，特别是处理批量等大事务、耗时操作。 系统解耦:系统不直接调用，降低依赖，特别是不在线也能保持通信最终完成。 削峰填谷:压力大的时候，缓冲部分请求消息，类似于背压处理。 可靠通信:提供多种消息模式、服务质量、顺序保障等。 消息处理模式 点对点： PTP =&amp;gt; queue 发布订阅： PubSub =&amp;gt; Topic 消息语义 QOS At most once At least once Exactly once</description></item><item><title/><link>https://fengzhenbing.github.io/posts/01jvm/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/01jvm/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</guid><description>垃圾回收算法 针对 堆内存回收；
+方法区：
+java 8 前 永久区（也参与垃圾回收，一样的算法，省事了，但是有默认最大内存限制，容易oom）
+java 8 彻底抛弃了 永久区，叫元数据区，使用本地内存
+分代收集理论 新生代
+老年代
+跨代引用： Remember set
+标记清除 产生内存碎片，内存分配复杂了。 可能需要类似硬盘的 “分区空闲分配链表” 等复杂方式解决
+Cms搜集器在old 区回收时采用， 但是内存碎片达到一定量，会采取一次标记清理。（和稀泥的做法，结合两者，）
+标记复制 一般用于新生代回收: Serial ParNew 的新生代采用该算法
+Ēden scurvivor scurvivor 8:1:1
+对象存活率较高时，需要更多的复制操作，效率会降低
+标记整理 用于old区：
+相对于 标记清除， 标记后，需要移动：将存活的对象移动到内存区域的一端。
+移动：增大的延迟，stw时间长些，但解决了内存碎片，内存分配复杂的问题，可以提高吞吐量。
+不移动：降低了延迟，但内存碎片，内存分配复杂， 吞吐量有所下降。
+垃圾回收器</description></item><item><title/><link>https://fengzhenbing.github.io/posts/02concurrency/disruptor%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/02concurrency/disruptor%E9%AB%98%E6%80%A7%E8%83%BD%E9%98%9F%E5%88%97/</guid><description>Disruptor通过以下设计来解决队列速度慢的问题：
+环形数组结构
+元素位置定位
+数组长度2^n， 位运算，加快定位的速度
+无锁设计
+Cas操作保证线程安全
+参考 https://tech.meituan.com/2016/11/18/disruptor.html
+https://blog.csdn.net/liweisnake/article/details/9113119</description></item><item><title/><link>https://fengzhenbing.github.io/posts/07message/content/06eip/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/07message/content/06eip/</guid><description/></item><item><title/><link>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%A8%A1%E5%BC%8F/</guid><description>模版方法 AbstractXXX
 观察者 数据同步模块
 责任链 插件链路执行</description></item><item><title/><link>https://fengzhenbing.github.io/posts/soul/content/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/soul/content/%E6%95%B0%E6%8D%AE%E5%90%8C%E6%AD%A5/</guid><description>![image-20210310194848831](/Users/mokernet/Library/Application Support/typora-user-images/image-20210310194848831.png)
-![image-20210310194828007](/Users/mokernet/Library/Application Support/typora-user-images/image-20210310194828007.png)</description></item><item><title>pulsar</title><link>https://fengzhenbing.github.io/posts/07message/content/05pulsar/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/07message/content/05pulsar/</guid><description>相关概念 安装测试 # 下载 wget https://mirrors.bfsu.edu.cn/apache/pulsar/pulsar-2.7.1/apache-pulsar-2.7.1-bin.tar.gz tar xvfz apache-pulsar-2.7.1-bin.tar.gz cd apache-pulsar-2.7.1 # 单机启动 bin/pulsar standalone # 消费消息 bin/pulsar-client consume my-topic -s &amp;#34;first-subscription&amp;#34; # 生产消息 bin/pulsar-client produce my-topic --messages &amp;#34;hello-pulsar&amp;#34; 相关资料 官网快速启动</description></item></channel></rss>
+![image-20210310194828007](/Users/mokernet/Library/Application Support/typora-user-images/image-20210310194828007.png)</description></item><item><title>pulsar</title><link>https://fengzhenbing.github.io/posts/07message/content/05pulsar/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://fengzhenbing.github.io/posts/07message/content/05pulsar/</guid><description>相关概念 计算存储分离 ![image-20210406220312072](/Users/mokernet/Library/Application Support/typora-user-images/image-20210406220312072.png) 安装测试 # 下载 wget https://mirrors.bfsu.edu.cn/apache/pulsar/pulsar-2.7.1/apache-pulsar-2.7.1-bin.tar.gz tar xvfz apache-pulsar-2.7.1-bin.tar.gz cd apache-pulsar-2.7.1 # 单机启动 bin/pulsar standalone # 消费消息 bin/pulsar-client consume my-topic -s &amp;#34;first-subscription&amp;#34; # 生产消息 bin/pulsar-client produce my-topic --messages &amp;#34;hello-pulsar&amp;#34; 相关资料 官网快速启动</description></item></channel></rss>
