@@ -25,7 +25,7 @@ menu:
   - TopicExchange:多关键字匹配 正则
 - Consumer 
 
-![image-20210405203826959](../../../../assets/images/blog/image-20210405203826959.png)
+![image-20210405203826959](/images/blog/image-20210405203826959.png)
 
 #### Docker方式安装运行
 
