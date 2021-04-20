@@ -3,7 +3,7 @@ section:
   name: 简介
   id: about
   enable: true
-  weight: 6
+  weight: 7
   showOnNavbar: true
   template: sections/about.html
 
@@ -36,22 +36,22 @@ socialLinks:
 # currently supported colors: blue, yellow, pink, green, sky, orange
 softSkills:
   - name: 领导能力
-    percentage: 90
+    percentage: 80
     color: blue
   - name: 团队合作
     percentage: 90
     color: yellow
   - name: 沟通能力
-    percentage: 85
+    percentage: 80
     color: pink
   - name: 辛勤刻苦
-    percentage: 85
+    percentage: 80
     color: green
   - name: 接受能力
     percentage: 85
     color: sky
   - name: 攻坚能力
-    percentage: 85
+    percentage: 90
     color: orange
 # you can also provide color code instead of pre-defined color name
 # - name: Example 1
