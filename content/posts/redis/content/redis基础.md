@@ -223,7 +223,14 @@ Redis的GEO特性在 Redis3.2版本中推出，这个功能可以将用户给定
     "zzz"
     ```
 
-  
+
+
+
+### redis pipeline
+
+使用管道一次执行多个命令，多个命令的结果一起返回，减少每个命令来回建立链接，来回响应的时间。
+
+https://redis.io/topics/pipelining
 
 ### redis事务
 
