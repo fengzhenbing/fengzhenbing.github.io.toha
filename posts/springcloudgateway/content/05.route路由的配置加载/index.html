@@ -3,7 +3,7 @@
 <a class=navbar-brand href=/><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png>Feng Zhenbing's Blog</a>
 <button class="navbar-toggler navbar-light" id=toc-toggler type=button onclick=toggleTOC()>
 <span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse lang-selector" id=top-nav-items><ul class="navbar-nav ml-auto"></ul></div></div><img src=/images/main-logo_hu864bbe108f1be1ae04b57f7f2fd9d631_5637_42x0_resize_box_2.png class=d-none id=main-logo>
-<img src=/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png class=d-none id=inverted-logo></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><input type=text placeholder=Search data-search id=search-box><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts data-filter=all>博文</a></li><div class=subtree><li><a href=/posts/introduction/>Hugo搭建博客</a></li><li><i class="fas fa-plus-circle"></i><a href=/posts/07message/>message</a><ul><li><a href=/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/>消息基础</a></li><li><a href=/posts/07message/content/02kafka/>kafka基础</a></li><li><a href=/posts/07message/content/03rabbitmq/>rabbitMQ</a></li><li><a href=/posts/07message/content/04rocketmq/>rocketMQ</a></li><li><a href=/posts/07message/content/05pulsar/>pulsar</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/miniprogram/>miniProgram</a><ul><li><a href=/posts/miniprogram/content/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/>小程序框架</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/redis/>redis</a><ul><li><a href=/posts/redis/content/redis%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C/>安装redis</a></li><li><a href=/posts/redis/content/redis%E5%9F%BA%E7%A1%80/>redis基础</a></li><li><a href=/posts/redis/content/redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/>redis应用场景</a></li><li><a href=/posts/redis/content/hazelcast/>hazelcast</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/springcloudgateway/>spring cloud gateway</a><ul class=active><li><a href=/posts/springcloudgateway/content/01.gateway%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91/>01.gateway整体逻辑</a></li><li><a href=/posts/springcloudgateway/content/02.reactor%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/>02.reactor响应式编程学习</a></li><li><a href=/posts/springcloudgateway/content/03.scg-nettywebserver%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/>03.scg NettyWebServer启动过程</a></li><li><a href=/posts/springcloudgateway/content/04.scg-%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/>04.scg 一次请求的执行过程</a></li><li><a class=active href=/posts/springcloudgateway/content/05.route%E8%B7%AF%E7%94%B1%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>05.route路由的配置加载</a></li><li><a href=/posts/springcloudgateway/content/06.route%E9%80%9A%E8%BF%87%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>06.route通过注册中心自动配置加载</a></li><li><a href=/posts/springcloudgateway/content/07.precidate%E7%9A%84%E5%AF%B9%E8%B7%AF%E7%94%B1%E8%BF%9B%E8%A1%8C%E9%80%89%E6%8B%A9/>07.precidate的对路由进行选择</a></li><li><a href=/posts/springcloudgateway/content/08.filter%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%8F%8A%E5%90%88%E5%B9%B6/>08.filter的配置加载及合并</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/soul/>soul</a><ul><li><a href=/posts/soul/content/%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84/>soul整体结构</a></li><li><a href=/posts/soul/content/%E4%BC%98%E9%9B%85%E5%81%9C%E6%9C%BA/>优雅停机</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://fengzhenbing.github.io/images/default-hero.jpg)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/author/fzb.jpeg><h5 class=author-name>冯振兵</h5><p>December 10, 2020</p></div><div class=title><h1>05.route路由的配置加载</h1></div><div class=post-content id=post-content><h3 id=route路由的配置加载>route路由的配置加载</h3><hr><p>主要在sprng-cloud-gateway-server的route包定义路由相关的定义，构建和加载</p><p><img src=https://uploader.shimo.im/f/l4BFEUZyeiAz3pZr.png alt=路由></p><h4 id=0相关配置>0.相关配置</h4><ul><li>通过springboot spi方式，springboot会启动spring.factories中配置的
+<img src=/images/inverted-logo_hu8376fd15465fef26ffe66b6bcf0ca686_13669_42x0_resize_box_2.png class=d-none id=inverted-logo></nav><section class=sidebar-section id=sidebar-section><div class=sidebar-holder><div class=sidebar id=sidebar><input type=text placeholder=Search data-search id=search-box><div class=sidebar-tree><ul class=tree id=tree><li id=list-heading><a href=/posts data-filter=all>博文</a></li><div class=subtree><li><a href=/posts/introduction/>Hugo搭建博客</a></li><li><i class="fas fa-plus-circle"></i><a href=/posts/07message/>message</a><ul><li><a href=/posts/07message/content/01%E6%B6%88%E6%81%AF%E5%9F%BA%E7%A1%80/>消息基础</a></li><li><a href=/posts/07message/content/02kafka/>kafka基础</a></li><li><a href=/posts/07message/content/03rabbitmq/>rabbitMQ</a></li><li><a href=/posts/07message/content/04rocketmq/>rocketMQ</a></li><li><a href=/posts/07message/content/05pulsar/>pulsar</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/miniprogram/>miniProgram</a><ul><li><a href=/posts/miniprogram/content/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6/>小程序框架</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/redis/>redis</a><ul><li><a href=/posts/redis/content/redis%E5%AE%89%E8%A3%85%E8%BF%90%E8%A1%8C/>安装redis</a></li><li><a href=/posts/redis/content/redis%E5%9F%BA%E7%A1%80/>redis基础</a></li><li><a href=/posts/redis/content/redis%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/>redis应用场景</a></li><li><a href=/posts/redis/content/hazelcast/>hazelcast</a></li></ul></li><li><i class="fas fa-minus-circle"></i><a class=active href=/posts/springcloudgateway/>spring cloud gateway</a><ul class=active><li><a href=/posts/springcloudgateway/content/01.gateway%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91/>01.gateway整体逻辑</a></li><li><a href=/posts/springcloudgateway/content/02.reactor%E5%93%8D%E5%BA%94%E5%BC%8F%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0/>02.reactor响应式编程学习</a></li><li><a href=/posts/springcloudgateway/content/03.scg-nettywebserver%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/>03.scg NettyWebServer启动过程</a></li><li><a href=/posts/springcloudgateway/content/04.scg-%E4%B8%80%E6%AC%A1%E8%AF%B7%E6%B1%82%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B/>04.scg 一次请求的执行过程</a></li><li><a class=active href=/posts/springcloudgateway/content/05.route%E8%B7%AF%E7%94%B1%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>05.route路由的配置加载</a></li><li><a href=/posts/springcloudgateway/content/06.route%E9%80%9A%E8%BF%87%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD/>06.route通过注册中心自动配置加载</a></li><li><a href=/posts/springcloudgateway/content/07.precidate%E7%9A%84%E5%AF%B9%E8%B7%AF%E7%94%B1%E8%BF%9B%E8%A1%8C%E9%80%89%E6%8B%A9/>07.precidate的对路由进行选择</a></li><li><a href=/posts/springcloudgateway/content/08.filter%E7%9A%84%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%8F%8A%E5%90%88%E5%B9%B6/>08.filter的配置加载及合并</a></li></ul></li><li><i class="fas fa-plus-circle"></i><a href=/posts/soul/>soul</a><ul><li><a href=/posts/soul/content/%E9%A1%B9%E7%9B%AE%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84/>soul整体结构</a></li><li><a href=/posts/soul/content/%E4%BC%98%E9%9B%85%E5%81%9C%E6%9C%BA/>优雅停机</a></li></ul></li></div></ul></div></div></div></section><section class=content-section id=content-section><div class=content><div class="container p-0 read-area"><div class="hero-area col-sm-12" id=hero-area style=background-image:url(https://fengzhenbing.github.io/images/default-hero.jpg)></div><div class=page-content><div class="author-profile ml-auto align-self-lg-center"><img class=rounded-circle src=/images/author/fzb.jpeg><h5 class=author-name>冯振兵</h5><p>December 10, 2020</p></div><div class=title><h1>05.route路由的配置加载</h1></div><div class=post-content id=post-content><h3 id=route路由的配置加载>route路由的配置加载</h3><hr><p>主要在sprng-cloud-gateway-server的route包定义路由相关的定义，构建和加载</p><p>![路由](<a href=https://gitee.com/fengzhenbing/picgo/raw/master/image>https://gitee.com/fengzhenbing/picgo/raw/master/image</a> (2).png)</p><h4 id=0相关配置>0.相关配置</h4><ul><li>通过springboot spi方式，springboot会启动spring.factories中配置的
 org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfiguration</li></ul><pre><code class=language-properties data-lang=properties>org.springframework.boot.autoconfigure.EnableAutoConfiguration=\ 
 org.springframework.cloud.gateway.config.GatewayAutoConfiguration,\
 org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfiguration,\
@@ -27,63 +27,61 @@ org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfigurat
    <span style=color:#75715e>//fzb 获取路由定义对象
 </span><span style=color:#75715e></span>   Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>();</span>
 <span style=color:#f92672>}</span>
-</code></pre></div><p>有以下实现：</p><p><img src=https://uploader.shimo.im/f/ysqsavn1nfbwS2C3.png alt=RouteDefinitionLocator></p><blockquote><ul><li>CachingRouteDefinitionLocator: 它包装了CompositeRouteDefinitionLocator,缓存路由定义RouteDefinition列表</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>
-<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CachingRouteDefinitionLocator</span>
-     <span style=color:#66d9ef>implements</span> RouteDefinitionLocator<span style=color:#f92672>,</span> ApplicationListener<span style=color:#f92672>&lt;</span>RefreshRoutesEvent<span style=color:#f92672>&gt;</span> <span style=color:#f92672>{</span><span style=color:#75715e>//fzb 事件监听RefreshRoutesEvent
-</span><span style=color:#75715e></span>
- <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String CACHE_KEY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;routeDefs&#34;</span><span style=color:#f92672>;</span>
+</code></pre></div><p>有以下实现：</p><p>![image (3)](<a href=https://gitee.com/fengzhenbing/picgo/raw/master/image>https://gitee.com/fengzhenbing/picgo/raw/master/image</a> (3).png)</p><blockquote><ul><li>CachingRouteDefinitionLocator: 它包装了CompositeRouteDefinitionLocator,缓存路由定义RouteDefinition列表</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java></code></pre></div></blockquote><p>public class CachingRouteDefinitionLocator
+implements RouteDefinitionLocator, ApplicationListener {//fzb 事件监听RefreshRoutesEvent</p><pre><code>private static final String CACHE_KEY = &quot;routeDefs&quot;;
 
- <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> RouteDefinitionLocator delegate<span style=color:#f92672>;</span>
- <span style=color:#75715e>//fzb 路由定义flux
-</span><span style=color:#75715e></span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> routeDefinitions<span style=color:#f92672>;</span>
- <span style=color:#75715e>//fzb 内存缓存RouteDefinition
-</span><span style=color:#75715e></span> <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> List<span style=color:#f92672>&gt;</span> cache <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ConcurrentHashMap<span style=color:#f92672>&lt;&gt;();</span>
- <span style=color:#f92672>...</span>
+private final RouteDefinitionLocator delegate;
+//fzb 路由定义flux
+private final Flux&lt;RouteDefinition&gt; routeDefinitions;
+//fzb 内存缓存RouteDefinition
+private final Map&lt;String, List&gt; cache = new ConcurrentHashMap&lt;&gt;();
+...
 
- <span style=color:#75715e>//fzb 监听到路由刷新事件，重新获取路由并缓存到cache
-</span><span style=color:#75715e></span> <span style=color:#a6e22e>@Override</span>
- <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>onApplicationEvent</span><span style=color:#f92672>(</span>RefreshRoutesEvent event<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-     fetch<span style=color:#f92672>().</span><span style=color:#a6e22e>materialize</span><span style=color:#f92672>().</span><span style=color:#a6e22e>collect</span><span style=color:#f92672>(</span>Collectors<span style=color:#f92672>.</span><span style=color:#a6e22e>toList</span><span style=color:#f92672>())</span>
-             <span style=color:#f92672>.</span><span style=color:#a6e22e>doOnNext</span><span style=color:#f92672>(</span>routes <span style=color:#f92672>-&gt;</span> cache<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>CACHE_KEY<span style=color:#f92672>,</span> routes<span style=color:#f92672>)).</span><span style=color:#a6e22e>subscribe</span><span style=color:#f92672>();</span>
- <span style=color:#f92672>}</span>
-<span style=color:#f92672>...</span>
-<span style=color:#f92672>}</span>
-</code></pre></div><blockquote><ul><li>CompositeRouteDefinitionLocator:
-遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并； 组合多种 RouteDefinitionLocator 的实现，为 routeDefinitions提供统一入口</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CompositeRouteDefinitionLocator</span> <span style=color:#66d9ef>implements</span> RouteDefinitionLocator <span style=color:#f92672>{</span>
-<span style=color:#f92672>...</span>
-	<span style=color:#75715e>//fzb 组合多个路由定义定位器RouteDefinitionLocator
-</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinitionLocator<span style=color:#f92672>&gt;</span> delegates<span style=color:#f92672>;</span>
-	<span style=color:#75715e>// fzb 路由定义的id 生成器，默认UUID
-</span><span style=color:#75715e></span>	<span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> IdGenerator idGenerator<span style=color:#f92672>;</span>
-<span style=color:#f92672>...</span>
-	<span style=color:#66d9ef>public</span> <span style=color:#a6e22e>CompositeRouteDefinitionLocator</span><span style=color:#f92672>(</span>Flux<span style=color:#f92672>&lt;</span>RouteDefinitionLocator<span style=color:#f92672>&gt;</span> delegates<span style=color:#f92672>,</span>
-			IdGenerator idGenerator<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>delegates</span> <span style=color:#f92672>=</span> delegates<span style=color:#f92672>;</span>
-		<span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>idGenerator</span> <span style=color:#f92672>=</span> idGenerator<span style=color:#f92672>;</span><span style=color:#75715e>// 路由定义的id 生成器，默认UUID
-</span><span style=color:#75715e></span>	<span style=color:#f92672>}</span>
+//fzb 监听到路由刷新事件，重新获取路由并缓存到cache
+@Override
+public void onApplicationEvent(RefreshRoutesEvent event) {
+    fetch().materialize().collect(Collectors.toList())
+            .doOnNext(routes -&gt; cache.put(CACHE_KEY, routes)).subscribe();
+}
+</code></pre><p>&mldr;
+}</p><pre><code> &gt; * CompositeRouteDefinitionLocator:
+&gt; 遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并； 组合多种 RouteDefinitionLocator 的实现，为 routeDefinitions提供统一入口
+​```java
+public class CompositeRouteDefinitionLocator implements RouteDefinitionLocator {
+...
+	//fzb 组合多个路由定义定位器RouteDefinitionLocator
+	private final Flux&lt;RouteDefinitionLocator&gt; delegates;
+	// fzb 路由定义的id 生成器，默认UUID
+	private final IdGenerator idGenerator;
+...
+	public CompositeRouteDefinitionLocator(Flux&lt;RouteDefinitionLocator&gt; delegates,
+			IdGenerator idGenerator) {
+		this.delegates = delegates;
+		this.idGenerator = idGenerator;// 路由定义的id 生成器，默认UUID
+	}
 
-	<span style=color:#a6e22e>@Override</span>
-	<span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
-      <span style=color:#75715e>//遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并
-</span><span style=color:#75715e></span>		<span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>delegates</span>
-				<span style=color:#f92672>.</span><span style=color:#a6e22e>flatMapSequential</span><span style=color:#f92672>(</span>RouteDefinitionLocator<span style=color:#f92672>::</span>getRouteDefinitions<span style=color:#f92672>)</span>
-				<span style=color:#f92672>.</span><span style=color:#a6e22e>flatMap</span><span style=color:#f92672>(</span>routeDefinition <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
-					<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>getId</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-						<span style=color:#66d9ef>return</span> randomId<span style=color:#f92672>().</span><span style=color:#a6e22e>map</span><span style=color:#f92672>(</span>id <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
-							routeDefinition<span style=color:#f92672>.</span><span style=color:#a6e22e>setId</span><span style=color:#f92672>(</span>id<span style=color:#f92672>);</span><span style=color:#75715e>// 设置uuid
-</span><span style=color:#75715e></span>							<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>log<span style=color:#f92672>.</span><span style=color:#a6e22e>isDebugEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
-								log<span style=color:#f92672>.</span><span style=color:#a6e22e>debug</span><span style=color:#f92672>(</span>
-										<span style=color:#e6db74>&#34;Id set on route definition: &#34;</span> <span style=color:#f92672>+</span> routeDefinition<span style=color:#f92672>);</span>
-							<span style=color:#f92672>}</span>
-							<span style=color:#66d9ef>return</span> routeDefinition<span style=color:#f92672>;</span>
-						<span style=color:#f92672>});</span>
-					<span style=color:#f92672>}</span>
-					<span style=color:#66d9ef>return</span> Mono<span style=color:#f92672>.</span><span style=color:#a6e22e>just</span><span style=color:#f92672>(</span>routeDefinition<span style=color:#f92672>);</span>
-				<span style=color:#f92672>});</span>
-	<span style=color:#f92672>}</span>
- <span style=color:#f92672>...</span>
-<span style=color:#f92672>}</span>
-</code></pre></div><blockquote><ul><li>PropertiesRouteDefinitionLocator: 从配置文件(GatewayProperties 例如，YML / Properties 等 ) 读取RouteDefinition</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>   <span style=color:#75715e>//fzb 从GatewayProperties读取路由定义
+	@Override
+	public Flux&lt;RouteDefinition&gt; getRouteDefinitions() {
+      //遍历执行所有RouteDefinitionLocator的查找路由定义方法,将找到的路由定义合并
+		return this.delegates
+				.flatMapSequential(RouteDefinitionLocator::getRouteDefinitions)
+				.flatMap(routeDefinition -&gt; {
+					if (routeDefinition.getId() == null) {
+						return randomId().map(id -&gt; {
+							routeDefinition.setId(id);// 设置uuid
+							if (log.isDebugEnabled()) {
+								log.debug(
+										&quot;Id set on route definition: &quot; + routeDefinition);
+							}
+							return routeDefinition;
+						});
+					}
+					return Mono.just(routeDefinition);
+				});
+	}
+ ...
+}
+</code></pre><blockquote><ul><li>PropertiesRouteDefinitionLocator: 从配置文件(GatewayProperties 例如，YML / Properties 等 ) 读取RouteDefinition</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>   <span style=color:#75715e>//fzb 从GatewayProperties读取路由定义
 </span><span style=color:#75715e></span>   <span style=color:#a6e22e>@Override</span>
    <span style=color:#66d9ef>public</span> Flux<span style=color:#f92672>&lt;</span>RouteDefinition<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRouteDefinitions</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
        <span style=color:#66d9ef>return</span> Flux<span style=color:#f92672>.</span><span style=color:#a6e22e>fromIterable</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>properties</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRoutes</span><span style=color:#f92672>());</span>
@@ -154,7 +152,7 @@ org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfigurat
 </span><span style=color:#75715e></span>	Flux<span style=color:#f92672>&lt;</span>Route<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRoutes</span><span style=color:#f92672>();</span>
 
 <span style=color:#f92672>}</span>
-</code></pre></div><p><img src=https://uploader.shimo.im/f/9QjAj62dWH3iDjHh.png alt=RouteLocator></p><p>类似RouteDefinitionLocator三个实现：</p><blockquote><ul><li>缓存：CachingRouteLocator： 缓存路由，查找时使用CompositeRouteLocator去查找</li><li>组合： CompositeRouteLocator：使用多个RouteLocator查找路由并合并</li><li>单个的 RouteDefinitionRouteLocator：最终使用RouteDefinitionLocator查找路由定义并转为路由对象Route
+</code></pre></div><p><img src=https://gitee.com/fengzhenbing/picgo/raw/master/routeLocator.png alt=routeLocator></p><p>类似RouteDefinitionLocator三个实现：</p><blockquote><ul><li>缓存：CachingRouteLocator： 缓存路由，查找时使用CompositeRouteLocator去查找</li><li>组合： CompositeRouteLocator：使用多个RouteLocator查找路由并合并</li><li>单个的 RouteDefinitionRouteLocator：最终使用RouteDefinitionLocator查找路由定义并转为路由对象Route
 单个路由的 filters = GlobalFilter + 默认GatewayFilter + 本路由配置的GatewayFilter</li></ul></blockquote><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RouteDefinitionRouteLocator</span>
 		<span style=color:#66d9ef>implements</span> RouteLocator<span style=color:#f92672>,</span> BeanFactoryAware<span style=color:#f92672>,</span> ApplicationEventPublisherAware <span style=color:#f92672>{</span>
 
