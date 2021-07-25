@@ -6,7 +6,7 @@ greeting: "哟, 我是"
 image: "images/author/fzb.jpeg"
 # give your some contact information. they will be used in the footer
 contactInfo:
-  邮箱: "595611161@qq.com"
+  邮箱: "fengzhenbing@apache.org"
   电话: "+8615380837691"
 
 # some summary about what you do，首页滚动信息
